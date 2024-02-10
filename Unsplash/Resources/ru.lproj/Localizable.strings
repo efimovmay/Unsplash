@@ -1,0 +1,10 @@
+//
+//  Unsplash.Localizable (ru)
+//
+
+// MARK: - Common strings
+"Yes.text" = "Да";
+"No.text" = "Нет";
+"Return.text" = "Вернуться";
+"Ok.text" = "Ок";
+"Error.text" = "Ошибка";

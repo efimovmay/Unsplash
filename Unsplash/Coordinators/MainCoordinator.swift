@@ -39,11 +39,11 @@ private extension MainCoordinator {
 		let coordinator: ICoordinator
 		switch pages[index] {
 		case .randomImages:
-			coordinator = FavotiteImagesCoordonator(
+			coordinator = RandomImagesCoordinator(
 				navigationController: controller
 			)
 		case .favoriteImages:
-			coordinator = RandomImagesCoordinator(
+			coordinator = FavotiteImagesCoordonator(
 				navigationController: controller
 			)
 		}

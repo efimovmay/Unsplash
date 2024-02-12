@@ -11,14 +11,12 @@ final class AppCoordinator: BaseCoordinator {
 	
 	// MARK: - Dependencies
 	
-	private let navigationController: UINavigationController
 	private var window: UIWindow?
 	
 	// MARK: - Initialization
 	
 	init(window: UIWindow?) {
 		self.window = window
-		self.navigationController = UINavigationController()
 	}
 	
 	// MARK: - Internal methods
@@ -32,9 +30,6 @@ final class AppCoordinator: BaseCoordinator {
 		let coordinator = MainCoordinator(tabBarController: tabBarController)
 		addDependency(coordinator)
 		coordinator.start()
-		
-		navigationController.isNavigationBarHidden = true
-		navigationController.setViewControllers([tabBarController], animated: true)
 		
 		window?.rootViewController = tabBarController
 		window?.makeKeyAndVisible()

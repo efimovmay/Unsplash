@@ -8,3 +8,10 @@
 "Return.text" = "Return";
 "Ok.text" = "Ok";
 "Error.text" = "Error";
+
+// MARK: - RandomImagesScreen strings
+"RandomImages.title" = "Fotos";
+"FavoriteImages.title" = "Favorite";
+
+// MARK: - RandomImagesScreen strings
+"RandomImagesScreen.title" = "Fotos";

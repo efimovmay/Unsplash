@@ -14,9 +14,9 @@ enum TabbarPage {
 	func pageTitleValue() -> String {
 		switch self {
 		case .randomImages:
-			return "Random"
+			return L10n.TabBar.favoriteImagesTitle
 		case .favoriteImages:
-			return "Favorite"
+			return L10n.TabBar.randomImagesTitle
 		}
 	}
 	

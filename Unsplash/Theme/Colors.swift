@@ -19,5 +19,5 @@ enum Colors {
 }
 
 enum Theme {
-	static let mainColor = Colors.white
+	static let backgroundColor = Colors.white
 }

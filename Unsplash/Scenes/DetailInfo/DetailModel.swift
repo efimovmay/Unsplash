@@ -1,15 +1,15 @@
 //
-//  RandomImagesModel.swift
+//  DetailModel.swift
 //  Unsplash
 //
-//  Created by Aleksey Efimov on 10.02.2024.
+//  Created by Aleksey Efimov on 13.02.2024.
 //
 
 import Foundation
 
-enum RandomImagesModel {
+enum DetailModel {
 	/// Структура описывающая главный экран приложения
 	struct ViewData {
-		let images: [Image]
+		let images: Image
 	}
 }

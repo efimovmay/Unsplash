@@ -14,3 +14,7 @@
 
 // MARK: - FavoriteImagesScreen strings
 "FavoriteImagesScreen.title" = "Favorite fotos";
+
+// MARK: - DetailScreen strings
+"DetailScreen.title" = "Detail info";
+

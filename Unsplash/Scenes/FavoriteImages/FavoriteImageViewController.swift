@@ -30,7 +30,7 @@ final class FavoriteImageViewController: UIViewController {
 	}
 	
 	// MARK: - Private properties
-	private var viewData = RandomImagesModel.ViewData(images: [], count: 0)
+	private var viewData = RandomImagesModel.ViewData(images: [])
 	
 	// MARK: - Lifecycle
 	override func viewDidLoad() {

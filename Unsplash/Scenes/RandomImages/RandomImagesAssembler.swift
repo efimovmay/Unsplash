@@ -18,9 +18,13 @@ final class RandomImagesAssembler {
 	}
 	
 	// MARK: - Public methods
-	func assembly() -> RandomImagesViewController {
+	func assembly(openDetailScene: ImageClosure?) -> RandomImagesViewController {
 		let viewController = RandomImagesViewController()
-		let presenter = RandomImagesPresenter(view: viewController, networkManager: networkManager)
+		let presenter = RandomImagesPresenter(
+			view: viewController,
+			networkManager: networkManager,
+			openDetailScene: openDetailScene
+		)
 		viewController.presenter = presenter
 		
 		return viewController

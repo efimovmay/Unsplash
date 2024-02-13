@@ -46,7 +46,12 @@ public enum L10n {
 	public enum FavoriteImagesScreen {
 		public static let title = L10n.tr("Localizable", "FavoriteImagesScreen.title")
 	}
+	
+	public enum DetailScreen {
+		public static let title = L10n.tr("Localizable", "DetailScreen.title")
+	}
 }
+
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:enable nesting type_body_length type_name
 

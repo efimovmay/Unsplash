@@ -35,7 +35,7 @@ final class MainCoordinator: BaseCoordinator {
 	}
 }
 
-// MARK: - run Flows -
+// MARK: - run Flows
 private extension MainCoordinator {
 	func runFlowByIndex(_ index: Int, on controller: UINavigationController) {
 		let coordinator: ICoordinator

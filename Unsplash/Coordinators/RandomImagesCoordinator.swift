@@ -28,7 +28,14 @@ final class RandomImagesCoordinator: ICoordinator {
 	}
 	
 	private func randomImagesScene() {
-		let viewController = RandomImagesAssembler(networkManager: networkManager).assembly()
+		let viewController = RandomImagesAssembler(networkManager: networkManager).assembly { [weak self] image in
+			self?.detailScene(image: image)
+		}
+		navigationController.pushViewController(viewController, animated: true)
+	}
+	
+	private func detailScene(image: Image) {
+		let viewController = DetailAssembler(networkManager: networkManager, image: image).assembly()
 		navigationController.pushViewController(viewController, animated: true)
 	}
 }

@@ -30,7 +30,8 @@ final class RandomImagesViewController: UIViewController {
 	}
 	
 	// MARK: - Private properties
-	private var viewData = RandomImagesModel.ViewData(images: [], count: 0)
+	
+	private var viewData = RandomImagesModel.ViewData(images: [])
 	
 	private lazy var collectionViewimage: UICollectionView = makeCollectionView()
 	
@@ -48,9 +49,10 @@ final class RandomImagesViewController: UIViewController {
 }
 
 // MARK: - UICollectionvView
+
 extension RandomImagesViewController: UICollectionViewDataSource {
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		viewData.count
+		viewData.images.count
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -61,17 +63,16 @@ extension RandomImagesViewController: UICollectionViewDataSource {
 		) as? ImageCell else {
 			return UICollectionViewCell()
 		}
-		let imageData = presenter?.fetch(index: indexPath.item, completion: { data in
+		
+		presenter?.fetch(index: indexPath.item, completion: { data in
 			cell.configure(with: UIImage(data: data) ?? .actions)
 		})
 		
-//		if let imageData = viewData.images[indexPath.item].data {
-//			cell.configure(with: UIImage(data: imageData) ?? .actions)
-//		} else {
-//			cell.configure(with: UIImage(systemName: "photo.fill.on.rectangle.fill") ?? .actions)
-//		}
-		
 		return cell
+	}
+	
+	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+		presenter?.didItemSelected(index: indexPath.item)
 	}
 }
 
@@ -123,6 +124,7 @@ extension RandomImagesViewController: UICollectionViewDelegateFlowLayout {
 	}
 }
 // MARK: - Setup UI
+
 private extension RandomImagesViewController {
 	func setupUI() {
 		title = L10n.RandomImagesScreen.title
@@ -154,6 +156,7 @@ private extension RandomImagesViewController {
 }
 
 // MARK: - Layout UI
+
 private extension RandomImagesViewController {
 	func layout() {
 		view.addSubview(collectionViewimage)
@@ -169,6 +172,7 @@ private extension RandomImagesViewController {
 }
 
 // MARK: - IMainViewController
+
 extension RandomImagesViewController: IRandomImagesViewController {
 	
 	func renderCollection(viewData: RandomImagesModel.ViewData) {

@@ -12,23 +12,31 @@ protocol IRandomImagesPresenter: AnyObject {
 	
 	/// Экран готов для отображения информации.
 	func viewIsReady()
+	
+	/// Экран готов для отображения информации.
 	func fetch(index: Int, completion: @escaping(Data) -> Void)
+	
+	/// Нажат item коллекции
+	func didItemSelected(index: Int)
 }
+ 
+typealias ImageClosure = (Image) -> Void
 
-/// Презентер для главного экрана
 final class RandomImagesPresenter: IRandomImagesPresenter {
 	
 	// MARK: - Dependencies
 	weak var view: IRandomImagesViewController?
-	var networkManager: INetworkManager
+	private var networkManager: INetworkManager
+	private var openDetailScene: ImageClosure?
 	
 	// MARK: - Private properties
 	private var images: [Image] = []
 	
 	// MARK: - Initialization
-	required init(view: IRandomImagesViewController, networkManager: INetworkManager) {
+	required init(view: IRandomImagesViewController, networkManager: INetworkManager, openDetailScene: ImageClosure?) {
 		self.view = view
 		self.networkManager = networkManager
+		self.openDetailScene = openDetailScene
 	}
 	
 	// MARK: - Public methods
@@ -37,7 +45,7 @@ final class RandomImagesPresenter: IRandomImagesPresenter {
 			switch result {
 			case .success(let images):
 				self.images = images
-				self.view?.renderCollection(viewData: RandomImagesModel.ViewData(images: [], count: images.count))
+				self.view?.renderCollection(viewData: RandomImagesModel.ViewData(images: images))
 			case .failure(let error):
 				print(error.localizedDescription) // swiftlint:disable:this print_using
 			}
@@ -54,5 +62,10 @@ final class RandomImagesPresenter: IRandomImagesPresenter {
 				print(error.localizedDescription)
 			}
 		}
+	}
+	
+	func didItemSelected(index: Int) {
+		let image = images[index]
+		openDetailScene?(image)
 	}
 }

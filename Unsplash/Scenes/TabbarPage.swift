@@ -14,18 +14,18 @@ enum TabbarPage {
 	func pageTitleValue() -> String {
 		switch self {
 		case .randomImages:
-			return L10n.TabBar.favoriteImagesTitle
+			return L10n.RandomImagesScreen.title
 		case .favoriteImages:
-			return L10n.TabBar.randomImagesTitle
+			return L10n.FavoriteImagesScreen.title
 		}
 	}
 	
 	func pageIconValue() -> UIImage {
 		switch self {
 		case .randomImages:
-			return Images.image(kind: .list)
+			return Images.image(kind: .fotos)
 		case .favoriteImages:
-			return Images.image(kind: .chart)
+			return Images.image(kind: .favorite)
 		}
 	}
 	

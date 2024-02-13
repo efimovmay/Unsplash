@@ -10,7 +10,11 @@ import Foundation
 enum RandomImagesModel {
 	/// Структура описывающая главный экран приложения
 	struct ViewData {
-		/// Содержит в себе список заметок для отображения
-		let images: [Image]
+		let images: [ImageData]
+		let count: Int
+	}
+	
+	struct ImageData {
+		let data: Data?
 	}
 }

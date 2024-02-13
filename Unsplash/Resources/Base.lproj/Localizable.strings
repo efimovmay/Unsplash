@@ -10,8 +10,7 @@
 "Error.text" = "Error";
 
 // MARK: - RandomImagesScreen strings
-"RandomImages.title" = "Fotos";
-"FavoriteImages.title" = "Favorite";
-
-// MARK: - RandomImagesScreen strings
 "RandomImagesScreen.title" = "Fotos";
+
+// MARK: - FavoriteImagesScreen strings
+"FavoriteImagesScreen.title" = "Favorite fotos";

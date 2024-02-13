@@ -10,17 +10,17 @@ import Foundation
 final class RandomImagesAssembler {
 	
 	// MARK: - Dependencies
-//	private let coreDataManager: ICoreDataManager
+	private let networkManager: INetworkManager
 	
 	// MARK: - Initialization
-	init() {
-//		self.coreDataManager = coreDataManager
+	init(networkManager: INetworkManager) {
+		self.networkManager = networkManager
 	}
 	
 	// MARK: - Public methods
 	func assembly() -> RandomImagesViewController {
 		let viewController = RandomImagesViewController()
-		let presenter = RandomImagesPresenter(view: viewController)
+		let presenter = RandomImagesPresenter(view: viewController, networkManager: networkManager)
 		viewController.presenter = presenter
 		
 		return viewController

@@ -11,7 +11,7 @@ protocol IRandomImagesViewController: AnyObject {
 	
 	/// Метод отрисовки информации на экране.
 	/// - Parameter viewModel: данные для отрисовки на экране.
-	func render(viewData: RandomImagesModel.ViewData)
+	func renderCollection(viewData: RandomImagesModel.ViewData)
 }
 
 final class RandomImagesViewController: UIViewController {
@@ -30,14 +30,15 @@ final class RandomImagesViewController: UIViewController {
 	}
 	
 	// MARK: - Private properties
-	private var viewData = RandomImagesModel.ViewData(images: [])
+	private var viewData = RandomImagesModel.ViewData(images: [], count: 0)
 	
-	private lazy var collectionViewFoto: UICollectionView = makeCollectionView()
+	private lazy var collectionViewimage: UICollectionView = makeCollectionView()
 	
 	// MARK: - Lifecycle
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		setupUI()
+		presenter?.viewIsReady()
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -49,13 +50,26 @@ final class RandomImagesViewController: UIViewController {
 // MARK: - UICollectionvView
 extension RandomImagesViewController: UICollectionViewDataSource {
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		9
+		viewData.count
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
-//		configureCell(cell, with: image)
-		cell.backgroundColor = .gray
+		
+		guard let cell = collectionView.dequeueReusableCell(
+			withReuseIdentifier: ImageCell.reuseIdentifier,
+			for: indexPath
+		) as? ImageCell else {
+			return UICollectionViewCell()
+		}
+		let imageData = presenter?.fetch(index: indexPath.item, completion: { data in
+			cell.configure(with: UIImage(data: data) ?? .actions)
+		})
+		
+//		if let imageData = viewData.images[indexPath.item].data {
+//			cell.configure(with: UIImage(data: imageData) ?? .actions)
+//		} else {
+//			cell.configure(with: UIImage(systemName: "photo.fill.on.rectangle.fill") ?? .actions)
+//		}
 		
 		return cell
 	}
@@ -117,18 +131,19 @@ private extension RandomImagesViewController {
 		navigationController?.navigationBar.prefersLargeTitles = true
 		navigationItem.backButtonDisplayMode = .minimal
 		view.backgroundColor = Theme.backgroundColor
+		
+		collectionViewimage.dataSource = self
+		collectionViewimage.delegate = self
 	}
 	
 	func makeCollectionView() -> UICollectionView {
 		let layout = UICollectionViewFlowLayout()
 		
 		let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
-		collection.backgroundColor = Theme.backgroundColor
+		collection.backgroundColor = .clear
 		collection.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
 		collection.translatesAutoresizingMaskIntoConstraints = false
-		collection.dataSource = self
-		collection.delegate = self
-		
+		collection.register(ImageCell.self, forCellWithReuseIdentifier: ImageCell.reuseIdentifier)
 		return collection
 	}
 	
@@ -141,14 +156,14 @@ private extension RandomImagesViewController {
 // MARK: - Layout UI
 private extension RandomImagesViewController {
 	func layout() {
-		view.addSubview(collectionViewFoto)
+		view.addSubview(collectionViewimage)
 		
 		let safeArea = view.safeAreaLayoutGuide
 		NSLayoutConstraint.activate([
-			collectionViewFoto.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-			collectionViewFoto.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-			collectionViewFoto.topAnchor.constraint(equalTo: safeArea.topAnchor),
-			collectionViewFoto.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: -Sizes.Padding.normal)
+			collectionViewimage.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+			collectionViewimage.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+			collectionViewimage.topAnchor.constraint(equalTo: safeArea.topAnchor),
+			collectionViewimage.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor)
 		])
 	}
 }
@@ -156,6 +171,8 @@ private extension RandomImagesViewController {
 // MARK: - IMainViewController
 extension RandomImagesViewController: IRandomImagesViewController {
 	
-	func render(viewData: RandomImagesModel.ViewData) {
+	func renderCollection(viewData: RandomImagesModel.ViewData) {
+		self.viewData = viewData
+		self.collectionViewimage.reloadData()
 	}
 }

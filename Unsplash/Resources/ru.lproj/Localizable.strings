@@ -10,8 +10,7 @@
 "Error.text" = "Ошибка";
 
 // MARK: - RandomImagesScreen strings
-"RandomImages.title" = "Фото";
-"FavoriteImages.title" = "Любимые";
-
-// MARK: - RandomImagesScreen strings
 "RandomImagesScreen.title" = "Фото";
+
+// MARK: - FavoriteImagesScreen strings
+"FavoriteImagesScreen.title" = "Любимые фото";

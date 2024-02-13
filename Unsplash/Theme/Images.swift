@@ -9,18 +9,18 @@ import UIKit
 
 enum Images {
 	enum ImageSF: String {
-		case list
-		case chart
+		case fotos
+		case favorite
 	}
 	
 	static func image(kind: ImageSF) -> UIImage {
 		let customImage: UIImage
 		
 		switch kind {
-		case .list:
-			customImage = UIImage(systemName: "list.bullet") ?? .actions
-		case .chart:
-			customImage = UIImage(systemName: "chart.pie") ?? .actions
+		case .fotos:
+			customImage = UIImage(systemName: "photo.fill.on.rectangle.fill") ?? .actions
+		case .favorite:
+			customImage = UIImage(systemName: "heart.square") ?? .actions
 		}
 		
 		return customImage

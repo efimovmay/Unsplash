@@ -39,13 +39,12 @@ public enum L10n {
 		public static let text = L10n.tr("Localizable", "Yes.text")
 	}
 	
-	public enum TabBar {
-		public static let randomImagesTitle = L10n.tr("Localizable", "RandomImages.title")
-		public static let favoriteImagesTitle = L10n.tr("Localizable", "FavoriteImages.title")
-	}
-	
 	public enum RandomImagesScreen {
 		public static let title = L10n.tr("Localizable", "RandomImagesScreen.title")
+	}
+	
+	public enum FavoriteImagesScreen {
+		public static let title = L10n.tr("Localizable", "FavoriteImagesScreen.title")
 	}
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length

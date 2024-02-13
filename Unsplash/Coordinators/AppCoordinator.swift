@@ -11,27 +11,29 @@ final class AppCoordinator: BaseCoordinator {
 	
 	// MARK: - Dependencies
 	
-	private var window: UIWindow?
+	private let tabBarController: UITabBarController
+	private let window: UIWindow?
+	private let networkManager: INetworkManager
 	
 	// MARK: - Initialization
-	
-	init(window: UIWindow?) {
+	init(tabBarController: UITabBarController, window: UIWindow?, networkManager: INetworkManager) {
+		self.tabBarController = tabBarController
+		
 		self.window = window
+		self.window?.rootViewController = tabBarController
+		self.window?.makeKeyAndVisible()
+		
+		self.networkManager = networkManager
 	}
 	
 	// MARK: - Internal methods
-	
 	override func start() {
 		runMainFlow()
 	}
 	
 	func runMainFlow() {
-		let tabBarController = TabBarController()
-		let coordinator = MainCoordinator(tabBarController: tabBarController)
+		let coordinator = MainCoordinator(tabBarController: tabBarController, networkManager: networkManager)
 		addDependency(coordinator)
 		coordinator.start()
-		
-		window?.rootViewController = tabBarController
-		window?.makeKeyAndVisible()
 	}
 }

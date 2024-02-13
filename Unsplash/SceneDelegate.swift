@@ -20,7 +20,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 		guard let scene = (scene as? UIWindowScene) else { return }
 		let window = UIWindow(windowScene: scene)
 		
-		appCoordinator = AppCoordinator(window: window)
+		let tabBarController = TabBarController()
+		let networkManager = NetworkManager()
+		appCoordinator = AppCoordinator(tabBarController: tabBarController, window: window, networkManager: networkManager)
 		appCoordinator.start()
 		
 		self.window = window

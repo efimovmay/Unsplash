@@ -8,33 +8,65 @@
 import Foundation
 
 struct Image: Codable {
-	var id: String
-	var altDescription: String
+	var createdAt: String
 	var urls: Urls
 	var links: LinksImage
+	var user: User
+	var location: Location?
+	var likes: Int?
 	
 	enum CodingKeys: String, CodingKey {
-		case id
-		case altDescription = "alt_description"
-		case urls, links
+		case createdAt = "created_at"
+		case urls
+		case links
+		case location
+		case user
+		case likes
 	}
 }
-struct Urls: Codable {
-	var raw, full, regular, small: String
-	var thumb, smallS3: String
+
+struct Location: Codable {
+	var name: String
 	
 	enum CodingKeys: String, CodingKey {
-		case raw, full, regular, small, thumb
+		case name
+	}
+}
+
+struct User: Codable {
+	var name: String
+	
+	enum CodingKeys: String, CodingKey {
+		case name
+	}
+}
+
+struct Urls: Codable {
+	var raw: String
+	var	full: String
+	var regular: String
+	var small: String
+	var thumb: String
+	var smallS3: String
+	
+	enum CodingKeys: String, CodingKey {
+		case raw
+		case full
+		case	 regular
+		case small
+		case thumb
 		case smallS3 = "small_s3"
 	}
 }
 
 struct LinksImage: Codable {
-	var linksSelf, html, download, downloadLocation: String
+	var linksSelf: String
+	var html: String
+	var download: String
 	
 	enum CodingKeys: String, CodingKey {
 		case linksSelf = "self"
-		case html, download
-		case downloadLocation = "download_location"
+		case html
+		case	 download
 	}
 }

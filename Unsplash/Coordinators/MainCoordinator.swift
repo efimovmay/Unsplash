@@ -13,6 +13,7 @@ final class MainCoordinator: BaseCoordinator {
 	
 	private let tabBarController: UITabBarController
 	private let networkManager: INetworkManager
+	private let coreDataManager = CoreDataManager()
 	
 	// MARK: - Private properties
 	
@@ -41,9 +42,17 @@ private extension MainCoordinator {
 		let coordinator: ICoordinator
 		switch pages[index] {
 		case .randomImages:
-			coordinator = RandomImagesCoordinator(navigationController: controller, networkManager: networkManager)
+			coordinator = RandomImagesCoordinator(
+				navigationController: controller,
+				networkManager: networkManager,
+				coreDataManager: coreDataManager
+			)
 		case .favoriteImages:
-			coordinator = FavotiteImagesCoordonator(navigationController: controller)
+			coordinator = FavotiteImagesCoordonator(
+				navigationController: controller,
+				networkManager: networkManager,
+				coreDataManager: coreDataManager
+			)
 		}
 		addDependency(coordinator)
 		coordinator.start()

@@ -17,3 +17,8 @@
 
 // MARK: - DetailScreen strings
 "DetailScreen.title" = "Детальная информация";
+"DetailScreen.user" = "Автор:";
+"DetailScreen.createdAt" = "Дата создания:";
+"DetailScreen.location" = "Место:";
+"DetailScreen.downloads" = "Загрузок:";
+"DetailScreen.isFavoriteTitle" = "Добавить в избранное";

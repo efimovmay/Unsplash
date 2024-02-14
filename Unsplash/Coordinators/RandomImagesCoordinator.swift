@@ -13,12 +13,18 @@ final class RandomImagesCoordinator: ICoordinator {
 	
 	private let navigationController: UINavigationController
 	private let networkManager: INetworkManager
+	private let coreDataManager: ICoreDataManager
 	
 	// MARK: - Initialization
 	
-	init(navigationController: UINavigationController, networkManager: INetworkManager) {
+	init(
+		navigationController: UINavigationController,
+		networkManager: INetworkManager,
+		coreDataManager: ICoreDataManager
+	) {
 		self.navigationController = navigationController
 		self.networkManager = networkManager
+		self.coreDataManager = coreDataManager
 	}
 	
 	// MARK: - Internal methods
@@ -35,7 +41,11 @@ final class RandomImagesCoordinator: ICoordinator {
 	}
 	
 	private func detailScene(image: Image) {
-		let viewController = DetailAssembler(networkManager: networkManager, image: image).assembly()
+		let viewController = DetailAssembler(
+			networkManager: networkManager,
+			image: image,
+			coreDataManager: coreDataManager
+		).assembly()
 		navigationController.pushViewController(viewController, animated: true)
 	}
 }

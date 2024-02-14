@@ -11,7 +11,7 @@ protocol IDetailViewController: AnyObject {
 	
 	/// Метод отрисовки информации на экране.
 	/// - Parameter viewModel: данные для отрисовки на экране.
-	func render(viewData: RandomImagesModel.ViewData)
+	func render(viewData: DetailModel.ViewData)
 }
 
 final class DetailViewController: UIViewController {
@@ -30,9 +30,26 @@ final class DetailViewController: UIViewController {
 	}
 	
 	// MARK: - Private properties
-//	private var viewData = DetailModel.ViewData(images: [])
+	private lazy var imageFoto: UIImageView = makeImage()
 	
+	private lazy var stackViewDescription: UIStackView = makeStackView()
+	private lazy var stackViewValue: UIStackView = makeStackView()
+	private lazy var stackViewMain: UIStackView = makeStackView()
+	
+	private lazy var labelUserDescription: UILabel = makeLabel(text: L10n.DetailScreen.user)
+	private lazy var labelCreatedAtDescription: UILabel = makeLabel(text: L10n.DetailScreen.createdAt)
+	private lazy var labelLocationDescription: UILabel = makeLabel(text: L10n.DetailScreen.location)
+	private lazy var labelDownloadsDescription: UILabel = makeLabel(text: L10n.DetailScreen.downloads)
+	
+	private lazy var labelUserValue: UILabel = makeLabel(text: "")
+	private lazy var labelCreatedAtValue: UILabel = makeLabel(text: "")
+	private lazy var labelLocationValue: UILabel = makeLabel(text: "")
+	private lazy var labelDownloadsValue: UILabel = makeLabel(text: "")
+	
+	private lazy var buttonIsFavotite: UIButton = makeButton()
+
 	// MARK: - Lifecycle
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		setupUI()
@@ -44,50 +61,113 @@ final class DetailViewController: UIViewController {
 	}
 }
 
+// MARK: - Actions
+
+private extension DetailViewController {
+	@objc
+	func addInFavorite() {
+		presenter?.addInFavorite()
+	}
+}
+
 // MARK: - Setup UI
+
 private extension DetailViewController {
 	func setupUI() {
+		presenter?.viewIsReady()
+		
 		title = L10n.DetailScreen.title
 		view.backgroundColor = Theme.backgroundColor
+		
+		stackViewDescription.axis = .vertical
+		stackViewDescription.addArrangedSubview(labelUserDescription)
+		stackViewDescription.addArrangedSubview(labelCreatedAtDescription)
+		stackViewDescription.addArrangedSubview(labelLocationDescription)
+		stackViewDescription.addArrangedSubview(labelDownloadsDescription)
+		
+		stackViewValue.axis = .vertical
+		stackViewValue.addArrangedSubview(labelUserValue)
+		stackViewValue.addArrangedSubview(labelCreatedAtValue)
+		stackViewValue.addArrangedSubview(labelLocationValue)
+		stackViewValue.addArrangedSubview(labelDownloadsValue)
+		
+		stackViewMain.axis = .horizontal
+		stackViewMain.addArrangedSubview(stackViewDescription)
+		stackViewMain.addArrangedSubview(stackViewValue)
 	}
 	
-	//	func makeCollectionView() -> UICollectionView {
-	//		let layout = UICollectionViewFlowLayout()
-	//
-	//		let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
-	//		collection.backgroundColor = Theme.backgroundColor
-	//		collection.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
-	//		collection.translatesAutoresizingMaskIntoConstraints = false
-	//		collection.dataSource = self
-	//		collection.delegate = self
-	//
-	//		return collection
-	//	}
-	//
-	//	func configureCell(_ cell: UICollectionViewCell, with image: Image) {
-	//		let contentConfiguration = cell.contentConfiguration
-	//		cell.contentConfiguration = contentConfiguration
-	//	}
+	func makeImage() -> UIImageView {
+		let image = UIImageView()
+		image.contentMode = .scaleAspectFit
+		image.translatesAutoresizingMaskIntoConstraints = false
+		return image
+	}
+	
+	func makeStackView() -> UIStackView {
+		let stackView = UIStackView()
+		stackView.axis = .vertical
+		stackView.spacing = Sizes.Padding.normal
+		stackView.translatesAutoresizingMaskIntoConstraints = false
+		return stackView
+	}
+	
+	func makeLabel(text: String) -> UILabel {
+		let label = UILabel()
+		label.text = text
+		label.translatesAutoresizingMaskIntoConstraints = false
+		return label
+	}
+	
+	func makeButton() -> UIButton {
+		let button = UIButton()
+		button.configuration = .filled()
+		button.configuration?.cornerStyle = .medium
+		button.configuration?.title = L10n.DetailScreen.isFavoriteTitle
+		button.configuration?.baseBackgroundColor = Theme.isFavoriteButtonColor
+		button.translatesAutoresizingMaskIntoConstraints = false
+		button.addTarget(self, action: #selector(addInFavorite), for: .touchUpInside)
+		return button
+	}
 }
 
 // MARK: - Layout UI
+
 private extension DetailViewController {
 	func layout() {
-		//		view.addSubview(collectionViewFoto)
-		//
-		//		let safeArea = view.safeAreaLayoutGuide
-		//		NSLayoutConstraint.activate([
-		//			collectionViewFoto.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-		//			collectionViewFoto.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-		//			collectionViewFoto.topAnchor.constraint(equalTo: safeArea.topAnchor),
-		//			collectionViewFoto.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: -Sizes.Padding.normal)
-		//		])
+		view.addSubview(imageFoto)
+		view.addSubview(stackViewMain)
+		view.addSubview(buttonIsFavotite)
+		
+		let safeArea = view.safeAreaLayoutGuide
+		NSLayoutConstraint.activate([
+			imageFoto.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: Sizes.Padding.normal),
+			imageFoto.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -Sizes.Padding.normal),
+			imageFoto.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: Sizes.Padding.normal),
+			imageFoto.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: Sizes.L.widthMultiplier),
+			
+			stackViewMain.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: Sizes.Padding.double),
+			stackViewMain.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -Sizes.Padding.double),
+			stackViewMain.topAnchor.constraint(equalTo: imageFoto.bottomAnchor, constant: Sizes.Padding.normal),
+			
+			buttonIsFavotite.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: Sizes.Padding.double),
+			buttonIsFavotite.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -Sizes.Padding.double),
+			buttonIsFavotite.topAnchor.constraint(equalTo: stackViewMain.bottomAnchor, constant: Sizes.Padding.normal)
+		])
 	}
 }
 
 // MARK: - IMainViewController
+
 extension DetailViewController: IDetailViewController {
 	
-	func render(viewData: RandomImagesModel.ViewData) {
+	func render(viewData: DetailModel.ViewData) {
+		labelUserValue.text = viewData.user
+		labelCreatedAtValue.text = viewData.createdAt
+		labelLocationValue.text = viewData.location
+		labelDownloadsValue.text = viewData.downloads
+		
+		presenter?.fetch(url: viewData.photo, completion: { image in
+			self.imageFoto.image = UIImage(data: image)?.roundedCornerImage(with: Sizes.cornerRadiusDouble)
+		})
 	}
 }

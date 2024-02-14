@@ -143,7 +143,6 @@ private extension RandomImagesViewController {
 		
 		let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
 		collection.backgroundColor = .clear
-		collection.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
 		collection.translatesAutoresizingMaskIntoConstraints = false
 		collection.register(ImageCell.self, forCellWithReuseIdentifier: ImageCell.reuseIdentifier)
 		return collection

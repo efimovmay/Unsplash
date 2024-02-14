@@ -10,7 +10,8 @@ import Foundation
 // swiftlint:disable type_name
 enum Sizes {
 	
-	static let cornerRadius: CGFloat = 6
+	static let cornerRadius: CGFloat = 10
+	static let cornerRadiusDouble: CGFloat = 20
 	static let borderWidth: CGFloat = 1
 	static let topInset: CGFloat = 180.0
 	
@@ -23,7 +24,7 @@ enum Sizes {
 	enum L {
 		static let width: CGFloat = 200
 		static let height: CGFloat = 50
-		static let widthMultiplier: CGFloat = 0.9
+		static let widthMultiplier: CGFloat = 0.35
 	}
 	
 	enum M {

@@ -10,6 +10,11 @@ import Foundation
 enum DetailModel {
 	/// Структура описывающая главный экран приложения
 	struct ViewData {
-		let images: Image
+		let photo: String
+		let user: String
+		let createdAt: String
+		let location: String
+		let downloads: String
+		let isLike: Bool
 	}
 }

@@ -49,6 +49,11 @@ public enum L10n {
 	
 	public enum DetailScreen {
 		public static let title = L10n.tr("Localizable", "DetailScreen.title")
+		public static let user = L10n.tr("Localizable", "DetailScreen.user")
+		public static let createdAt = L10n.tr("Localizable", "DetailScreen.createdAt")
+		public static let location = L10n.tr("Localizable", "DetailScreen.location")
+		public static let downloads = L10n.tr("Localizable", "DetailScreen.downloads")
+		public static let isFavoriteTitle = L10n.tr("Localizable", "DetailScreen.isFavoriteTitle")
 	}
 }
 

@@ -17,4 +17,8 @@
 
 // MARK: - DetailScreen strings
 "DetailScreen.title" = "Detail info";
-
+"DetailScreen.user" = "Autor:";
+"DetailScreen.createdAt" = "Date:";
+"DetailScreen.location" = "Location:";
+"DetailScreen.downloads" = "Downloads:";
+"DetailScreen.isFavoriteTitle" = "Add in favorite";

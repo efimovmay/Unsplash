@@ -16,8 +16,13 @@ enum Colors {
 		light: UIColor(hex: 0x000000),
 		dark: UIColor(hex: 0xFFFFFF)
 	)
+	static let red = UIColor.color(
+		light: UIColor(hex: 0xff0000),
+		dark: UIColor(hex: 0xFF4040)
+	)
 }
 
 enum Theme {
 	static let backgroundColor = Colors.white
+	static let isFavoriteButtonColor = Colors.red
 }

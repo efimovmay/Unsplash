@@ -23,7 +23,7 @@ enum Sizes {
 	
 	enum L {
 		static let width: CGFloat = 200
-		static let height: CGFloat = 50
+		static let height: CGFloat = 150
 		static let widthMultiplier: CGFloat = 0.35
 	}
 	

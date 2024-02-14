@@ -8,7 +8,7 @@
 import Foundation
 
 struct Image: Codable {
-	var createdAt: String
+	var createdAt: String?
 	var urls: Urls
 	var links: LinksImage
 	var user: User
@@ -26,7 +26,7 @@ struct Image: Codable {
 }
 
 struct Location: Codable {
-	var name: String
+	var name: String?
 	
 	enum CodingKeys: String, CodingKey {
 		case name
@@ -34,7 +34,7 @@ struct Location: Codable {
 }
 
 struct User: Codable {
-	var name: String
+	var name: String?
 	
 	enum CodingKeys: String, CodingKey {
 		case name

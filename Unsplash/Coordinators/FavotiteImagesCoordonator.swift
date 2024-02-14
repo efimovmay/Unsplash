@@ -34,7 +34,12 @@ final class FavotiteImagesCoordonator: ICoordinator {
 	}
 	
 	private func favoriteImagesScene() {
-		let viewController = FavoriteImageViewController()
+		let viewController = FavoriteImagesAssembler(
+			networkManager: networkManager,
+			coreDataManager: coreDataManager
+		).assembly { [weak self] image in
+			self?.detailScene(image: image)
+		}
 		navigationController.pushViewController(viewController, animated: true)
 	}
 	

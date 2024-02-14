@@ -18,6 +18,9 @@ protocol IFavoriteImagesPresenter: AnyObject {
 	
 	/// Нажат item коллекции
 	func didItemSelected(index: Int)
+	
+	/// Удаляет из избранного
+	func deleteImage(index: Int)
 }
 
 typealias ImageClosureFavorite = (Image) -> Void
@@ -90,5 +93,10 @@ final class FavoriteImagesPresenter: IFavoriteImagesPresenter {
 				print(error.localizedDescription) // swiftlint:disable:this print_using
 			}
 		}
+	}
+	
+	func deleteImage(index: Int) {
+		let image = images[index]
+		coreDataManager.deleteImage(image)
 	}
 }

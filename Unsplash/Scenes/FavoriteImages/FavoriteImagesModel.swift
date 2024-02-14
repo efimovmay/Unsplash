@@ -10,7 +10,7 @@ import Foundation
 enum FavoriteImagesModel {
 	/// Структура описывающая главный экран приложения
 	struct ViewData {
-		let images: [FavImage]
+		var images: [FavImage]
 	}
 	struct FavImage {
 		let imageUrl: String

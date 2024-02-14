@@ -55,6 +55,18 @@ extension FavoriteImagesViewController: UITableViewDelegate {
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		presenter?.didItemSelected(index: indexPath.item)
 	}
+	
+	func tableView(
+		_ tableView: UITableView,
+		commit editingStyle: UITableViewCell.EditingStyle,
+		forRowAt indexPath: IndexPath
+	) {
+		if editingStyle == .delete {
+			presenter?.deleteImage(index: indexPath.row)
+			viewData.images.remove(at: indexPath.row)
+			tableView.deleteRows(at: [indexPath], with: .automatic)
+		}
+	}
 }
 
 // MARK: - UITableViewDataSource

@@ -47,6 +47,7 @@
 		5B8951452B7CC7BC007129A4 /* FavoriteImagesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8951442B7CC7BC007129A4 /* FavoriteImagesPresenter.swift */; };
 		5B8951472B7CC8D6007129A4 /* FavoriteImagesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8951462B7CC8D6007129A4 /* FavoriteImagesModel.swift */; };
 		5B89514B2B7CD7A8007129A4 /* FavoriteImagesAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B89514A2B7CD7A8007129A4 /* FavoriteImagesAssembler.swift */; };
+		5B8951502B7E39CE007129A4 /* String+DateFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B89514F2B7E39CE007129A4 /* String+DateFormat.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -93,6 +94,7 @@
 		5B8951442B7CC7BC007129A4 /* FavoriteImagesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteImagesPresenter.swift; sourceTree = "<group>"; };
 		5B8951462B7CC8D6007129A4 /* FavoriteImagesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteImagesModel.swift; sourceTree = "<group>"; };
 		5B89514A2B7CD7A8007129A4 /* FavoriteImagesAssembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteImagesAssembler.swift; sourceTree = "<group>"; };
+		5B89514F2B7E39CE007129A4 /* String+DateFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+DateFormat.swift"; sourceTree = "<group>"; };
 		DB7C74C12D3C916340FCEF88 /* Pods_Unsplash.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Unsplash.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB995463490BA137A8EF8FFD /* Pods-Unsplash.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Unsplash.debug.xcconfig"; path = "Target Support Files/Pods-Unsplash/Pods-Unsplash.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -167,6 +169,7 @@
 				5B73F5492B67E30D006BFCD6 /* UIColor+Dynamic.swift */,
 				5B73F54B2B67E33D006BFCD6 /* UIColor+Hex.swift */,
 				5B8951362B7C0D13007129A4 /* UIImage+CornerRadius.swift */,
+				5B89514F2B7E39CE007129A4 /* String+DateFormat.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -443,6 +446,7 @@
 				5B89514B2B7CD7A8007129A4 /* FavoriteImagesAssembler.swift in Sources */,
 				5B8951272B7A2565007129A4 /* NetworkManager.swift in Sources */,
 				5B8951252B78288B007129A4 /* ImageCell.swift in Sources */,
+				5B8951502B7E39CE007129A4 /* String+DateFormat.swift in Sources */,
 				5B8951472B7CC8D6007129A4 /* FavoriteImagesModel.swift in Sources */,
 				5B8951452B7CC7BC007129A4 /* FavoriteImagesPresenter.swift in Sources */,
 				5B8951232B77FAFA007129A4 /* RandomImagesModel.swift in Sources */,

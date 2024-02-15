@@ -59,7 +59,7 @@ final class DetailPresenter: IDetailPresenter {
 		view?.render(viewData: DetailModel.ViewData(
 			photo: image?.urls.regular ?? "n/a",
 			user: image?.user.name ?? "n/a",
-			createdAt: image?.createdAt ?? "n/a",
+			createdAt: image?.createdAt?.formateDate() ?? "n/a",
 			location: image?.location?.name ?? "n/a",
 			downloads: String(image?.downloads ?? 0),
 			isFaivorite: isfavorite

@@ -42,7 +42,10 @@ final class RandomImagesPresenter: IRandomImagesPresenter {
 	
 	// MARK: - Public methods
 	func viewIsReady() {
-		networkManager.fetchImages { result in
+		networkManager.fetchImages(
+			secondUrl: Links.randomURL.rawValue,
+			parametersUrl: ["client_id": Links.token.rawValue, "count": 12],
+			completion: { result in
 			switch result {
 			case .success(let images):
 				self.images = images
@@ -51,6 +54,7 @@ final class RandomImagesPresenter: IRandomImagesPresenter {
 				print(error.localizedDescription) // swiftlint:disable:this print_using
 			}
 		}
+		)
 	}
 	
 	func fetch(index: Int, completion: @escaping(Data) -> Void) {

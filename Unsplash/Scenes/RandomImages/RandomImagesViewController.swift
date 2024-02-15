@@ -152,14 +152,10 @@ extension RandomImagesViewController: UISearchBarDelegate {
 private extension RandomImagesViewController {
 	func setupUI() {
 		title = L10n.RandomImagesScreen.title
-		navigationItem.setHidesBackButton(true, animated: true)
-		navigationItem.backButtonDisplayMode = .minimal
 		navigationController?.navigationBar.prefersLargeTitles = true
-		navigationItem.backButtonDisplayMode = .minimal
-		navigationItem.searchController = searchController
-
 		view.backgroundColor = Theme.backgroundColor
 		
+		navigationItem.searchController = searchController
 		navigationItem.rightBarButtonItem = UIBarButtonItem(
 			barButtonSystemItem: .refresh,
 			target: self,

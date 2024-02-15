@@ -61,7 +61,7 @@ final class DetailPresenter: IDetailPresenter {
 			user: image?.user.name ?? "n/a",
 			createdAt: image?.createdAt ?? "n/a",
 			location: image?.location?.name ?? "n/a",
-			downloads: String(image?.likes ?? 0),
+			downloads: String(image?.downloads ?? 0),
 			isFaivorite: isfavorite
 		))
 	}

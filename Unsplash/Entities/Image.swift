@@ -21,7 +21,7 @@ struct Image: Codable {
 	let links: LinksImage
 	let user: User
 	let location: Location?
-	let likes: Int?
+	let downloads: Int?
 	
 	enum CodingKeys: String, CodingKey {
 		case createdAt = "created_at"
@@ -29,7 +29,7 @@ struct Image: Codable {
 		case links
 		case location
 		case user
-		case likes
+		case downloads
 	}
 }
 

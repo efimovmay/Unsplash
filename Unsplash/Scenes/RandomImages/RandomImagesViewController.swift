@@ -16,11 +16,9 @@ protocol IRandomImagesViewController: AnyObject {
 
 final class RandomImagesViewController: UIViewController {
 	// MARK: - Dependencies
-	
 	var presenter: IRandomImagesPresenter?
 	
 	// MARK: - Initialization
-	
 	init() {
 		super.init(nibName: nil, bundle: nil)
 	}
@@ -30,7 +28,6 @@ final class RandomImagesViewController: UIViewController {
 	}
 	
 	// MARK: - Private properties
-	
 	private var viewData = RandomImagesModel.ViewData(images: [])
 	
 	private lazy var collectionViewimage: UICollectionView = makeCollectionView()
@@ -49,7 +46,6 @@ final class RandomImagesViewController: UIViewController {
 }
 
 // MARK: - UICollectionvView
-
 extension RandomImagesViewController: UICollectionViewDataSource {
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		viewData.images.count
@@ -77,7 +73,6 @@ extension RandomImagesViewController: UICollectionViewDataSource {
 }
 
 extension RandomImagesViewController: UICollectionViewDelegateFlowLayout {
-	
 	func collectionView(
 		_ collectionView: UICollectionView,
 		layout collectionViewLayout: UICollectionViewLayout,
@@ -96,7 +91,6 @@ extension RandomImagesViewController: UICollectionViewDelegateFlowLayout {
 		layout collectionViewLayout: UICollectionViewLayout,
 		insetForSectionAt section: Int
 	) -> UIEdgeInsets {
-		
 		return UIEdgeInsets(
 			top: Sizes.Padding.half,
 			left: Sizes.Padding.half,
@@ -110,7 +104,6 @@ extension RandomImagesViewController: UICollectionViewDelegateFlowLayout {
 		layout collectionViewLayout: UICollectionViewLayout,
 		minimumLineSpacingForSectionAt section: Int
 	) -> CGFloat {
-		
 		return Sizes.Padding.half
 	}
 	
@@ -119,12 +112,11 @@ extension RandomImagesViewController: UICollectionViewDelegateFlowLayout {
 		layout collectionViewLayout: UICollectionViewLayout,
 		minimumInteritemSpacingForSectionAt section: Int
 	) -> CGFloat {
-		
 		return Sizes.Padding.half
 	}
 }
-// MARK: - Setup UI
 
+// MARK: - Setup UI
 private extension RandomImagesViewController {
 	func setupUI() {
 		title = L10n.RandomImagesScreen.title
@@ -155,7 +147,6 @@ private extension RandomImagesViewController {
 }
 
 // MARK: - Layout UI
-
 private extension RandomImagesViewController {
 	func layout() {
 		view.addSubview(collectionViewimage)
@@ -171,7 +162,6 @@ private extension RandomImagesViewController {
 }
 
 // MARK: - IMainViewController
-
 extension RandomImagesViewController: IRandomImagesViewController {
 	
 	func renderCollection(viewData: RandomImagesModel.ViewData) {

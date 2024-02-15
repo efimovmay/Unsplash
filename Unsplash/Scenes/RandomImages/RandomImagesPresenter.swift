@@ -13,7 +13,8 @@ protocol IRandomImagesPresenter: AnyObject {
 	/// Экран готов для отображения информации.
 	func viewIsReady()
 	
-	/// Экран готов для отображения информации.
+	/// Загрузка изображения.
+	/// - Parameter index: индекс изображения.
 	func fetch(index: Int, completion: @escaping(Data) -> Void)
 	
 	/// Нажат item коллекции

@@ -7,13 +7,14 @@
 
 import Foundation
 
-/// Протокол презентера для отображения главного экрана.
+/// Протокол презентера для отображения экрана избранных изображений
 protocol IFavoriteImagesPresenter: AnyObject {
 	
 	/// Экран готов для отображения информации.
 	func viewIsReady()
 	
-	/// Экран готов для отображения информации.
+	/// Загрузка изображения.
+	/// - Parameter index: индекс изображения.
 	func fetch(index: Int, completion: @escaping(Data) -> Void)
 	
 	/// Нажат item коллекции

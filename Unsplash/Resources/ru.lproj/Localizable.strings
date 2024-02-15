@@ -19,7 +19,7 @@
 "FavoriteImagesScreen.title" = "Любимые фото";
 
 // MARK: - DetailScreen strings
-"DetailScreen.title" = "Детальная информация";
+"DetailScreen.title" = "О изображении";
 "DetailScreen.user" = "Автор:";
 "DetailScreen.createdAt" = "Дата создания:";
 "DetailScreen.location" = "Место:";

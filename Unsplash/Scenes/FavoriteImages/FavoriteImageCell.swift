@@ -37,7 +37,6 @@ final class FavoriteImageCell: UITableViewCell {
 	// MARK: - Public methods
 	
 	func configureLabel(text: String) {
-		tintColor = .darkGray
 		labelText.text = text
 	}
 	
@@ -59,6 +58,7 @@ private extension FavoriteImageCell {
 	func makeTextLabel() -> UILabel {
 		let label = UILabel()
 		label.textColor = .gray
+		label.numberOfLines = 0
 		label.translatesAutoresizingMaskIntoConstraints = false
 		return label
 	}

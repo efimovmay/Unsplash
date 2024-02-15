@@ -93,6 +93,7 @@ extension FavoriteImagesViewController: UITableViewDataSource {
 		Sizes.heigthRow
 	}
 }
+
 // MARK: - Setup UI
 private extension FavoriteImagesViewController {
 	func makeTableView() -> UITableView {

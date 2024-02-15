@@ -50,8 +50,7 @@ final class DetailViewController: UIViewController {
 	private lazy var labelLocationValue: UILabel = makeLabel(text: "")
 	private lazy var labelDownloadsValue: UILabel = makeLabel(text: "")
 	
-	private lazy var buttonAddInFavotite: UIButton = makeAddButton()
-	private lazy var buttonDelFavotite: UIButton = makeDelButton()
+	private lazy var buttonIsFavotite: UIButton = makeAddButton()
 	
 	// MARK: - Lifecycle
 	override func viewDidLoad() {
@@ -70,13 +69,6 @@ private extension DetailViewController {
 	@objc
 	func addInFavorite() {
 		presenter?.addInFavorite()
-	}
-}
-
-private extension DetailViewController {
-	@objc
-	func delFavorite() {
-		presenter?.deleteImage()
 	}
 }
 
@@ -131,21 +123,10 @@ private extension DetailViewController {
 		let button = UIButton()
 		button.configuration = .filled()
 		button.configuration?.cornerStyle = .large
-		button.configuration?.title = L10n.DetailScreen.addInFavorite
+		button.configuration?.title = ""
 		button.configuration?.baseBackgroundColor = Theme.addInFavoriteButtonColor
 		button.translatesAutoresizingMaskIntoConstraints = false
 		button.addTarget(self, action: #selector(addInFavorite), for: .touchUpInside)
-		return button
-	}
-	
-	func makeDelButton() -> UIButton {
-		let button = UIButton()
-		button.configuration = .filled()
-		button.configuration?.cornerStyle = .large
-		button.configuration?.title = L10n.DetailScreen.delFavorite
-		button.configuration?.baseBackgroundColor = Theme.delFavoriteButtonColor
-		button.translatesAutoresizingMaskIntoConstraints = false
-		button.addTarget(self, action: #selector(delFavorite), for: .touchUpInside)
 		return button
 	}
 }
@@ -155,8 +136,7 @@ private extension DetailViewController {
 	func layout() {
 		view.addSubview(imageFoto)
 		view.addSubview(stackViewMain)
-		view.addSubview(buttonAddInFavotite)
-		view.addSubview(buttonDelFavotite)
+		view.addSubview(buttonIsFavotite)
 		
 		let safeArea = view.safeAreaLayoutGuide
 		NSLayoutConstraint.activate([
@@ -169,13 +149,9 @@ private extension DetailViewController {
 			stackViewMain.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -Sizes.Padding.double),
 			stackViewMain.topAnchor.constraint(equalTo: imageFoto.bottomAnchor, constant: Sizes.Padding.normal),
 			
-			buttonAddInFavotite.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: Sizes.Padding.double),
-			buttonAddInFavotite.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -Sizes.Padding.double),
-			buttonAddInFavotite.topAnchor.constraint(equalTo: stackViewMain.bottomAnchor, constant: Sizes.Padding.normal),
-			
-			buttonDelFavotite.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: Sizes.Padding.double),
-			buttonDelFavotite.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -Sizes.Padding.double),
-			buttonDelFavotite.topAnchor.constraint(equalTo: stackViewMain.bottomAnchor, constant: Sizes.Padding.normal)
+			buttonIsFavotite.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: Sizes.Padding.double),
+			buttonIsFavotite.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -Sizes.Padding.double),
+			buttonIsFavotite.topAnchor.constraint(equalTo: stackViewMain.bottomAnchor, constant: Sizes.Padding.normal)
 		])
 	}
 }
@@ -196,7 +172,10 @@ extension DetailViewController: IDetailViewController {
 	}
 	
 	func updateIsFavoriteButton(isFaivorite: Bool) {
-		buttonAddInFavotite.isHidden = isFaivorite
-		buttonDelFavotite.isHidden = !isFaivorite
+		if isFaivorite {
+			buttonIsFavotite.configuration?.title = L10n.DetailScreen.delFavorite
+		} else {
+			buttonIsFavotite.configuration?.title = L10n.DetailScreen.addInFavorite
+		}
 	}
 }

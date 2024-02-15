@@ -17,11 +17,8 @@ protocol IDetailPresenter: AnyObject {
 	/// - Parameter url: строка URL изображения.
 	func fetch(url: String, completion: @escaping(Data) -> Void)
 	
-	/// Добавить в избранное.
+	/// Добавить в избранное (удалить).
 	func addInFavorite()
-	
-	/// Удалить из избранного.
-	func deleteImage()
 }
 
 /// Презентер для главного экрана
@@ -77,17 +74,16 @@ final class DetailPresenter: IDetailPresenter {
 	}
 	
 	func addInFavorite() {
-		coreDataManager.create(
-			url: image?.links.linksSelf ?? "",
-			author: image?.user.name ?? "",
-			linkToImage: image?.urls.small ?? ""
-		)
-		view?.updateIsFavoriteButton(isFaivorite: true)
-	}
-	
-	func deleteImage() {
-		guard let image = coreDataManager.getImage(url: image?.links.linksSelf ?? "") else { return }
-		coreDataManager.deleteImage(image)
-		view?.updateIsFavoriteButton(isFaivorite: false)
+		if let image = coreDataManager.getImage(url: image?.links.linksSelf ?? "") {
+			coreDataManager.deleteImage(image)
+			view?.updateIsFavoriteButton(isFaivorite: false)
+		} else {
+			coreDataManager.create(
+				url: image?.links.linksSelf ?? "",
+				author: image?.user.name ?? "",
+				linkToImage: image?.urls.small ?? ""
+			)
+			view?.updateIsFavoriteButton(isFaivorite: true)
+		}
 	}
 }

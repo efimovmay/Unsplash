@@ -11,6 +11,8 @@
 
 // MARK: - RandomImagesScreen strings
 "RandomImagesScreen.title" = "Fotos";
+"RandomImagesScreen.titleAlert" = "Update";
+"RandomImagesScreen.textAlert" = "Do you want to update your data?";
 
 // MARK: - FavoriteImagesScreen strings
 "FavoriteImagesScreen.title" = "Favorite fotos";

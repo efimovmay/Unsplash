@@ -41,6 +41,8 @@ public enum L10n {
 	
 	public enum RandomImagesScreen {
 		public static let title = L10n.tr("Localizable", "RandomImagesScreen.title")
+		public static let titleAlert = L10n.tr("Localizable", "RandomImagesScreen.titleAlert")
+		public static let textAlert = L10n.tr("Localizable", "RandomImagesScreen.textAlert")
 	}
 	
 	public enum FavoriteImagesScreen {

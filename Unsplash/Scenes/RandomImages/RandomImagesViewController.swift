@@ -45,6 +45,23 @@ final class RandomImagesViewController: UIViewController {
 	}
 }
 
+// MARK: - Actions
+private extension RandomImagesViewController {
+	@objc
+	func reload() {
+		let alert = UIAlertController(
+			title: L10n.RandomImagesScreen.titleAlert,
+			message: L10n.RandomImagesScreen.textAlert,
+			preferredStyle: .alert
+		)
+		alert.addAction(UIAlertAction(title: L10n.Yes.text, style: .destructive))
+		alert.addAction(UIAlertAction(title: L10n.Ok.text, style: .default, handler: { _ in
+			self.presenter?.viewIsReady()
+		}))
+		present(alert, animated: true, completion: nil)
+	}
+}
+
 // MARK: - UICollectionvView
 extension RandomImagesViewController: UICollectionViewDataSource {
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -125,6 +142,12 @@ private extension RandomImagesViewController {
 		navigationController?.navigationBar.prefersLargeTitles = true
 		navigationItem.backButtonDisplayMode = .minimal
 		view.backgroundColor = Theme.backgroundColor
+		
+		navigationItem.rightBarButtonItem = UIBarButtonItem(
+			barButtonSystemItem: .refresh,
+			target: self,
+			action: #selector(reload)
+		)
 		
 		collectionViewimage.dataSource = self
 		collectionViewimage.delegate = self

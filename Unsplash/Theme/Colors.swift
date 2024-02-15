@@ -24,5 +24,6 @@ enum Colors {
 
 enum Theme {
 	static let backgroundColor = Colors.white
-	static let isFavoriteButtonColor = Colors.red
+	static let addInFavoriteButtonColor = Colors.red
+	static let delFavoriteButtonColor = Colors.red
 }

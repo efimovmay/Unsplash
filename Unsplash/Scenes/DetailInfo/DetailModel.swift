@@ -8,13 +8,13 @@
 import Foundation
 
 enum DetailModel {
-	/// Структура описывающая главный экран приложения
+	/// Структура описывающая  экран детальной информации.
 	struct ViewData {
 		let photo: String
 		let user: String
 		let createdAt: String
 		let location: String
 		let downloads: String
-		let isLike: Bool
+		let isFaivorite: Bool
 	}
 }

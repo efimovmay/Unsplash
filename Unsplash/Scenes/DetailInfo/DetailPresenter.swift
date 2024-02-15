@@ -7,13 +7,21 @@
 
 import Foundation
 
-/// Протокол презентера для отображения главного экрана.
+/// Протокол презентера экрана детальной информации.
 protocol IDetailPresenter: AnyObject {
 	
 	/// Экран готов для отображения информации.
 	func viewIsReady()
+	
+	/// Загрузка изображения.
+	/// - Parameter url: строка URL изображения.
 	func fetch(url: String, completion: @escaping(Data) -> Void)
+	
+	/// Добавить в избранное.
 	func addInFavorite()
+	
+	/// Удалить из избранного.
+	func deleteImage()
 }
 
 /// Презентер для главного экрана
@@ -42,13 +50,18 @@ final class DetailPresenter: IDetailPresenter {
 	
 	// MARK: - Public methods
 	func viewIsReady() {
+		var isfavorite = false
+		if coreDataManager.getImage(url: image?.links.linksSelf ?? "") != nil {
+			isfavorite = true
+		}
+		
 		view?.render(viewData: DetailModel.ViewData(
 			photo: image?.urls.regular ?? "n/a",
 			user: image?.user.name ?? "n/a",
 			createdAt: image?.createdAt ?? "n/a",
 			location: image?.location?.name ?? "n/a",
 			downloads: String(image?.likes ?? 0),
-			isLike: true
+			isFaivorite: isfavorite
 		))
 	}
 	
@@ -69,5 +82,12 @@ final class DetailPresenter: IDetailPresenter {
 			author: image?.user.name ?? "",
 			linkToImage: image?.urls.small ?? ""
 		)
+		view?.updateIsFavoriteButton(isFaivorite: true)
+	}
+	
+	func deleteImage() {
+		guard let image = coreDataManager.getImage(url: image?.links.linksSelf ?? "") else { return }
+		coreDataManager.deleteImage(image)
+		view?.updateIsFavoriteButton(isFaivorite: false)
 	}
 }

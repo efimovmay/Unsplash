@@ -53,7 +53,8 @@ public enum L10n {
 		public static let createdAt = L10n.tr("Localizable", "DetailScreen.createdAt")
 		public static let location = L10n.tr("Localizable", "DetailScreen.location")
 		public static let downloads = L10n.tr("Localizable", "DetailScreen.downloads")
-		public static let isFavoriteTitle = L10n.tr("Localizable", "DetailScreen.isFavoriteTitle")
+		public static let addInFavorite = L10n.tr("Localizable", "DetailScreen.addInFavorite")
+		public static let delFavorite = L10n.tr("Localizable", "DetailScreen.delFavorite")
 	}
 }
 

@@ -21,4 +21,5 @@
 "DetailScreen.createdAt" = "Date:";
 "DetailScreen.location" = "Location:";
 "DetailScreen.downloads" = "Downloads:";
-"DetailScreen.isFavoriteTitle" = "Add in favorite";
+"DetailScreen.addInFavorite" = "Add in favorite";
+"DetailScreen.delFavorite" = "Del from favorites";

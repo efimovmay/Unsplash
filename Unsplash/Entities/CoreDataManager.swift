@@ -12,6 +12,7 @@ protocol ICoreDataManager {
 	func create(url: String, author: String, linkToImage: String)
 	func deleteImage(_ image: FavoriteImage)
 	func fetchData(completion: (Result<[FavoriteImage], Error>) -> Void)
+	func getImage(url: String) -> FavoriteImage?
 	func saveContext()
 }
 
@@ -56,6 +57,18 @@ final class CoreDataManager: ICoreDataManager {
 	func deleteImage(_ image: FavoriteImage) {
 		viewContext.delete(image)
 		saveContext()
+	}
+	
+	func getImage(url: String) -> FavoriteImage? {
+		let request = NSFetchRequest<FavoriteImage>(entityName: "FavoriteImage")
+		request.predicate = NSPredicate(format: "url = %@", url)
+		
+		do {
+			return try viewContext.fetch(request).first
+		} catch {
+			print(error) // swiftlint:disable:this print_using
+			return nil
+		}
 	}
 	
 	// MARK: - Core Data Saving support

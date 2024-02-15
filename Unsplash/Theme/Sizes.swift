@@ -13,7 +13,7 @@ enum Sizes {
 	static let cornerRadius: CGFloat = 10
 	static let cornerRadiusDouble: CGFloat = 20
 	static let borderWidth: CGFloat = 1
-	static let topInset: CGFloat = 180.0
+	static let heigthRow: CGFloat = 180.0
 	
 	enum Padding {
 		static let half: CGFloat = 8
@@ -22,7 +22,7 @@ enum Sizes {
 	}
 	
 	enum L {
-		static let width: CGFloat = 200
+		static let width: CGFloat = 160
 		static let height: CGFloat = 150
 		static let widthMultiplier: CGFloat = 0.35
 	}

@@ -67,8 +67,7 @@ private extension FavoriteImageCell {
 		let newConstraints = [
 			imageViewFoto.topAnchor.constraint(equalTo: topAnchor, constant: Sizes.Padding.normal),
 			imageViewFoto.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Sizes.Padding.normal),
-			imageViewFoto.heightAnchor.constraint(equalToConstant: Sizes.L.height),
-			imageViewFoto.widthAnchor.constraint(equalTo: imageViewFoto.heightAnchor),
+			imageViewFoto.widthAnchor.constraint(equalToConstant: Sizes.L.width),
 			imageViewFoto.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -Sizes.Padding.normal),
 			
 			labelText.topAnchor.constraint(equalTo: topAnchor, constant: Sizes.Padding.normal),

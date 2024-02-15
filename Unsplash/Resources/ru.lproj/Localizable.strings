@@ -21,4 +21,5 @@
 "DetailScreen.createdAt" = "Дата создания:";
 "DetailScreen.location" = "Место:";
 "DetailScreen.downloads" = "Загрузок:";
-"DetailScreen.isFavoriteTitle" = "Добавить в избранное";
+"DetailScreen.addInFavorite" = "Добавить в избранное";
+"DetailScreen.delFavorite" = "Убрать из избранного";

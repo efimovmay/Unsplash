@@ -4,5 +4,5 @@ platform :ios, '15.0'
 
 target 'Unsplash' do
 	use_frameworks!
-	pod 'Alamofire', '~> 5.5.0'
+	pod 'Alamofire', '~> 5.6.4'
 end

@@ -31,6 +31,7 @@ final class RandomImagesViewController: UIViewController {
 	private var viewData = RandomImagesModel.ViewData(images: [])
 	
 	private lazy var collectionViewimage: UICollectionView = makeCollectionView()
+	private lazy var searchController: UISearchController = makeSearchController()
 	
 	// MARK: - Lifecycle
 	override func viewDidLoad() {
@@ -132,6 +133,12 @@ extension RandomImagesViewController: UICollectionViewDelegateFlowLayout {
 		return Sizes.Padding.half
 	}
 }
+// MARK: - UISearchBarDelegate
+extension RandomImagesViewController: UISearchBarDelegate {
+	func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+		presenter?.fetchSearchImage(searchBy: searchBar.text ?? "")
+	}
+}
 
 // MARK: - Setup UI
 private extension RandomImagesViewController {
@@ -141,6 +148,8 @@ private extension RandomImagesViewController {
 		navigationItem.backButtonDisplayMode = .minimal
 		navigationController?.navigationBar.prefersLargeTitles = true
 		navigationItem.backButtonDisplayMode = .minimal
+		navigationItem.searchController = searchController
+
 		view.backgroundColor = Theme.backgroundColor
 		
 		navigationItem.rightBarButtonItem = UIBarButtonItem(
@@ -153,9 +162,17 @@ private extension RandomImagesViewController {
 		collectionViewimage.delegate = self
 	}
 	
+	func makeSearchController() -> UISearchController {
+		let searchController = UISearchController(searchResultsController: nil)
+		searchController.searchBar.placeholder = L10n.RandomImagesScreen.seachPlaceholder
+		searchController.searchBar.sizeToFit()
+		searchController.searchBar.delegate = self
+		return searchController
+	}
+	
 	func makeCollectionView() -> UICollectionView {
 		let layout = UICollectionViewFlowLayout()
-		
+
 		let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
 		collection.backgroundColor = .clear
 		collection.translatesAutoresizingMaskIntoConstraints = false

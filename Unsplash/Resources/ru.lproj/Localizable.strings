@@ -13,6 +13,7 @@
 "RandomImagesScreen.title" = "Фото";
 "RandomImagesScreen.titleAlert" = "Обновление";
 "RandomImagesScreen.textAlert" = "Вы хотите обновить данные?";
+"RandomImagesScreen.seachPlaceholder" = "Поиск";
 
 // MARK: - FavoriteImagesScreen strings
 "FavoriteImagesScreen.title" = "Любимые фото";

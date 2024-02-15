@@ -7,13 +7,21 @@
 
 import Foundation
 
+struct SearchResult: Codable {
+	let results: [Image]
+	
+	enum CodingKeys: String, CodingKey {
+		case results
+	}
+}
+
 struct Image: Codable {
-	var createdAt: String?
-	var urls: Urls
-	var links: LinksImage
-	var user: User
-	var location: Location?
-	var likes: Int?
+	let createdAt: String?
+	let urls: Urls
+	let links: LinksImage
+	let user: User
+	let location: Location?
+	let likes: Int?
 	
 	enum CodingKeys: String, CodingKey {
 		case createdAt = "created_at"
@@ -26,7 +34,7 @@ struct Image: Codable {
 }
 
 struct Location: Codable {
-	var name: String?
+	let name: String?
 	
 	enum CodingKeys: String, CodingKey {
 		case name
@@ -34,7 +42,7 @@ struct Location: Codable {
 }
 
 struct User: Codable {
-	var name: String?
+	let name: String?
 	
 	enum CodingKeys: String, CodingKey {
 		case name
@@ -42,12 +50,12 @@ struct User: Codable {
 }
 
 struct Urls: Codable {
-	var raw: String
-	var	full: String
-	var regular: String
-	var small: String
-	var thumb: String
-	var smallS3: String
+	let raw: String
+	let	full: String
+	let regular: String
+	let small: String
+	let thumb: String
+	let smallS3: String
 	
 	enum CodingKeys: String, CodingKey {
 		case raw
@@ -60,9 +68,9 @@ struct Urls: Codable {
 }
 
 struct LinksImage: Codable {
-	var linksSelf: String
-	var html: String
-	var download: String
+	let linksSelf: String
+	let html: String
+	let download: String
 	
 	enum CodingKeys: String, CodingKey {
 		case linksSelf = "self"

@@ -19,6 +19,10 @@ protocol IRandomImagesPresenter: AnyObject {
 	
 	/// Нажат item коллекции
 	func didItemSelected(index: Int)
+	
+	/// Загрузка изображений по поиску.
+	/// - Parameter searchBy: текст для поиска.
+	func fetchSearchImage(searchBy: String)
 }
  
 typealias ImageClosure = (Image) -> Void
@@ -42,10 +46,7 @@ final class RandomImagesPresenter: IRandomImagesPresenter {
 	
 	// MARK: - Public methods
 	func viewIsReady() {
-		networkManager.fetchImages(
-			secondUrl: Links.randomURL.rawValue,
-			parametersUrl: ["client_id": Links.token.rawValue, "count": 12],
-			completion: { result in
+		networkManager.fetchRandomImages { result in
 			switch result {
 			case .success(let images):
 				self.images = images
@@ -54,7 +55,18 @@ final class RandomImagesPresenter: IRandomImagesPresenter {
 				print(error.localizedDescription) // swiftlint:disable:this print_using
 			}
 		}
-		)
+	}
+	
+	func fetchSearchImage(searchBy: String) {
+		networkManager.fetchSearchImages(searchBy: searchBy) { result in
+			switch result {
+			case .success(let images):
+				self.images = images
+				self.view?.renderCollection(viewData: RandomImagesModel.ViewData(images: images))
+			case .failure(let error):
+				print(error.localizedDescription) // swiftlint:disable:this print_using
+			}
+		}
 	}
 	
 	func fetch(index: Int, completion: @escaping(Data) -> Void) {

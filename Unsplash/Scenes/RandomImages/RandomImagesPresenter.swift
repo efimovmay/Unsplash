@@ -30,14 +30,17 @@ typealias ImageClosure = (Image) -> Void
 final class RandomImagesPresenter: IRandomImagesPresenter {
 	
 	// MARK: - Dependencies
+	
 	weak var view: IRandomImagesViewController?
 	private var networkManager: INetworkManager
 	private var openDetailScene: ImageClosure?
 	
 	// MARK: - Private properties
+	
 	private var images: [Image] = []
 	
 	// MARK: - Initialization
+	
 	required init(view: IRandomImagesViewController, networkManager: INetworkManager, openDetailScene: ImageClosure?) {
 		self.view = view
 		self.networkManager = networkManager
@@ -45,6 +48,7 @@ final class RandomImagesPresenter: IRandomImagesPresenter {
 	}
 	
 	// MARK: - Public methods
+	
 	func viewIsReady() {
 		networkManager.fetchRandomImages { result in
 			switch result {

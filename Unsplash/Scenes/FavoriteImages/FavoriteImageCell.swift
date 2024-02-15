@@ -11,10 +11,12 @@ final class FavoriteImageCell: UITableViewCell {
 	static let cellIdentifier = "FavoriteImageCell"
 	
 	// MARK: - Private properties
+	
 	private lazy var imageViewFoto = makeImageView()
 	private lazy var labelText = makeTextLabel()
 	
 	// MARK: - Initialization
+	
 	override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
 		super.init(style: style, reuseIdentifier: reuseIdentifier)
 		setupUI()
@@ -26,12 +28,14 @@ final class FavoriteImageCell: UITableViewCell {
 	}
 	
 	// MARK: - Lifecycle
+	
 	override func layoutSubviews() {
 		super.layoutSubviews()
 		layout()
 	}
 	
 	// MARK: - Public methods
+	
 	func configureLabel(text: String) {
 		tintColor = .darkGray
 		labelText.text = text
@@ -43,6 +47,7 @@ final class FavoriteImageCell: UITableViewCell {
 }
 
 // MARK: - Setup UI
+
 private extension FavoriteImageCell {
 	func makeImageView() -> UIImageView {
 		let imageView = UIImageView()

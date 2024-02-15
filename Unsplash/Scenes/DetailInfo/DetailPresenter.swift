@@ -25,14 +25,17 @@ protocol IDetailPresenter: AnyObject {
 final class DetailPresenter: IDetailPresenter {
 	
 	// MARK: - Dependencies
+	
 	weak var view: IDetailViewController?
 	private let networkManager: INetworkManager
 	private let coreDataManager: ICoreDataManager
 	
 	// MARK: - Private properties
+	
 	private var image: Image?
 	
 	// MARK: - Initialization
+	
 	required init(
 		view: IDetailViewController,
 		networkManager: INetworkManager,
@@ -46,6 +49,7 @@ final class DetailPresenter: IDetailPresenter {
 	}
 	
 	// MARK: - Public methods
+	
 	func viewIsReady() {
 		var isfavorite = false
 		if coreDataManager.getImage(url: image?.links.linksSelf ?? "") != nil {

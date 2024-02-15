@@ -16,9 +16,11 @@ protocol IRandomImagesViewController: AnyObject {
 
 final class RandomImagesViewController: UIViewController {
 	// MARK: - Dependencies
+	
 	var presenter: IRandomImagesPresenter?
 	
 	// MARK: - Initialization
+	
 	init() {
 		super.init(nibName: nil, bundle: nil)
 	}
@@ -28,12 +30,14 @@ final class RandomImagesViewController: UIViewController {
 	}
 	
 	// MARK: - Private properties
+	
 	private var viewData = RandomImagesModel.ViewData(images: [])
 	
 	private lazy var collectionViewimage: UICollectionView = makeCollectionView()
 	private lazy var searchController: UISearchController = makeSearchController()
 	
 	// MARK: - Lifecycle
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		setupUI()
@@ -47,6 +51,7 @@ final class RandomImagesViewController: UIViewController {
 }
 
 // MARK: - Actions
+
 private extension RandomImagesViewController {
 	@objc
 	func reload() {
@@ -64,6 +69,7 @@ private extension RandomImagesViewController {
 }
 
 // MARK: - UICollectionvView
+
 extension RandomImagesViewController: UICollectionViewDataSource {
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		viewData.images.count
@@ -134,6 +140,7 @@ extension RandomImagesViewController: UICollectionViewDelegateFlowLayout {
 	}
 }
 // MARK: - UISearchBarDelegate
+
 extension RandomImagesViewController: UISearchBarDelegate {
 	func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
 		presenter?.fetchSearchImage(searchBy: searchBar.text ?? "")
@@ -141,6 +148,7 @@ extension RandomImagesViewController: UISearchBarDelegate {
 }
 
 // MARK: - Setup UI
+
 private extension RandomImagesViewController {
 	func setupUI() {
 		title = L10n.RandomImagesScreen.title
@@ -187,6 +195,7 @@ private extension RandomImagesViewController {
 }
 
 // MARK: - Layout UI
+
 private extension RandomImagesViewController {
 	func layout() {
 		view.addSubview(collectionViewimage)
@@ -202,6 +211,7 @@ private extension RandomImagesViewController {
 }
 
 // MARK: - IMainViewController
+
 extension RandomImagesViewController: IRandomImagesViewController {
 	
 	func renderCollection(viewData: RandomImagesModel.ViewData) {

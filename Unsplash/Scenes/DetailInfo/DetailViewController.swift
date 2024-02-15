@@ -25,6 +25,7 @@ final class DetailViewController: UIViewController {
 	var presenter: IDetailPresenter?
 	
 	// MARK: - Initialization
+	
 	init() {
 		super.init(nibName: nil, bundle: nil)
 	}
@@ -34,6 +35,7 @@ final class DetailViewController: UIViewController {
 	}
 	
 	// MARK: - Private properties
+	
 	private lazy var imageFoto: UIImageView = makeImage()
 	
 	private lazy var stackViewDescription: UIStackView = makeStackView()
@@ -53,6 +55,7 @@ final class DetailViewController: UIViewController {
 	private lazy var buttonIsFavotite: UIButton = makeAddButton()
 	
 	// MARK: - Lifecycle
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		setupUI()
@@ -65,6 +68,7 @@ final class DetailViewController: UIViewController {
 }
 
 // MARK: - Actions
+
 private extension DetailViewController {
 	@objc
 	func addInFavorite() {
@@ -73,6 +77,7 @@ private extension DetailViewController {
 }
 
 // MARK: - Setup UI
+
 private extension DetailViewController {
 	func setupUI() {
 		presenter?.viewIsReady()
@@ -132,6 +137,7 @@ private extension DetailViewController {
 }
 
 // MARK: - Layout UI
+
 private extension DetailViewController {
 	func layout() {
 		view.addSubview(imageFoto)
@@ -157,6 +163,7 @@ private extension DetailViewController {
 }
 
 // MARK: - IMainViewController
+
 extension DetailViewController: IDetailViewController {
 	
 	func render(viewData: DetailModel.ViewData) {

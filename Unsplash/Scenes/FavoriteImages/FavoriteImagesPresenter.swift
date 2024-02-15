@@ -29,15 +29,18 @@ typealias ImageClosureFavorite = (Image) -> Void
 final class FavoriteImagesPresenter: IFavoriteImagesPresenter {
 	
 	// MARK: - Dependencies
+	
 	weak var view: IFavoriteImagesViewController?
 	private var networkManager: INetworkManager
 	private let coreDataManager: ICoreDataManager
 	private var openDetailScene: ImageClosureFavorite?
 	
 	// MARK: - Private properties
+	
 	private var images: [FavoriteImage] = []
 	
 	// MARK: - Initialization
+	
 	required init(
 		view: IFavoriteImagesViewController,
 		networkManager: INetworkManager,
@@ -51,6 +54,7 @@ final class FavoriteImagesPresenter: IFavoriteImagesPresenter {
 	}
 	
 	// MARK: - Public methods
+	
 	func viewIsReady() {
 		coreDataManager.fetchData { [unowned self] result in
 			switch result {

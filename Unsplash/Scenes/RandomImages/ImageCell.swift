@@ -7,13 +7,15 @@
 
 import UIKit
 
-class ImageCell: UICollectionViewCell {
+final class ImageCell: UICollectionViewCell {
 	static let reuseIdentifier = "ImageCell"
 	
 	// MARK: - Private Properties
+	
 	private lazy var imageView = makeImageView()
 	
 	// MARK: - Lyfecycle
+	
 	override init(frame: CGRect) {
 		super.init(frame: frame)
 		setupViews()
@@ -24,12 +26,14 @@ class ImageCell: UICollectionViewCell {
 	}
 	
 	// MARK: - Public Methods
+	
 	func configure(with image: UIImage) {
 		imageView.image = image
 	}
 }
 
 // MARK: - Setup View
+
 private extension ImageCell {
 	
 	func makeImageView() -> UIImageView {

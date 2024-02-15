@@ -17,9 +17,11 @@ protocol IFavoriteImagesViewController: AnyObject {
 final class FavoriteImagesViewController: UIViewController {
 	
 	// MARK: - Dependencies
+	
 	var presenter: IFavoriteImagesPresenter?
 	
 	// MARK: - Initialization
+	
 	init() {
 		super.init(nibName: nil, bundle: nil)
 	}
@@ -29,11 +31,13 @@ final class FavoriteImagesViewController: UIViewController {
 	}
 	
 	// MARK: - Private properties
+	
 	private var viewData = FavoriteImagesModel.ViewData(images: [])
 	
 	private lazy var tableView: UITableView = makeTableView()
 	
 	// MARK: - Lifecycle
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		setupUI()
@@ -67,6 +71,7 @@ extension FavoriteImagesViewController: UITableViewDelegate {
 }
 
 // MARK: - UITableViewDataSource
+
 extension FavoriteImagesViewController: UITableViewDataSource {
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		viewData.images.count
@@ -95,6 +100,7 @@ extension FavoriteImagesViewController: UITableViewDataSource {
 }
 
 // MARK: - Setup UI
+
 private extension FavoriteImagesViewController {
 	func makeTableView() -> UITableView {
 		let tableView = UITableView()
@@ -115,6 +121,7 @@ private extension FavoriteImagesViewController {
 }
 
 // MARK: - Layout UI
+
 private extension FavoriteImagesViewController {
 	func layout() {
 		view.addSubview(tableView)
@@ -131,6 +138,7 @@ private extension FavoriteImagesViewController {
 }
 
 // MARK: - IMainViewController
+
 extension FavoriteImagesViewController: IFavoriteImagesViewController {
 	func render(viewData: FavoriteImagesModel.ViewData) {
 		self.viewData = viewData

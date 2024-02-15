@@ -16,6 +16,7 @@ final class AppCoordinator: BaseCoordinator {
 	private let networkManager: INetworkManager
 	
 	// MARK: - Initialization
+	
 	init(tabBarController: UITabBarController, window: UIWindow?, networkManager: INetworkManager) {
 		self.tabBarController = tabBarController
 		
@@ -27,6 +28,7 @@ final class AppCoordinator: BaseCoordinator {
 	}
 	
 	// MARK: - Internal methods
+	
 	override func start() {
 		runMainFlow()
 	}

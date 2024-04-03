@@ -25,10 +25,15 @@ final class ImageCell: UICollectionViewCell {
 		super.init(coder: coder)
 	}
 	
+	override func prepareForReuse() {
+		super.prepareForReuse()
+		imageView.image = nil
+	}
+	
 	// MARK: - Public Methods
 	
-	func configure(with image: UIImage) {
-		imageView.image = image
+	func configure(imageURL: String) {
+		imageView.load(urlString: imageURL)
 	}
 }
 

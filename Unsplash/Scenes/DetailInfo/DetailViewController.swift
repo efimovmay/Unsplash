@@ -72,6 +72,8 @@ final class DetailViewController: UIViewController {
 private extension DetailViewController {
 	@objc
 	func addInFavorite() {
+		let generator = UIImpactFeedbackGenerator(style: .light)
+		generator.impactOccurred()
 		presenter?.addInFavorite()
 	}
 }
@@ -104,7 +106,9 @@ private extension DetailViewController {
 	
 	func makeImage() -> UIImageView {
 		let image = UIImageView()
-		image.contentMode = .scaleAspectFit
+		image.contentMode = .scaleAspectFill
+		image.clipsToBounds = true
+		image.layer.cornerRadius = Sizes.cornerRadius
 		image.translatesAutoresizingMaskIntoConstraints = false
 		return image
 	}

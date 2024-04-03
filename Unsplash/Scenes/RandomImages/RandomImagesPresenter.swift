@@ -10,19 +10,17 @@ import Foundation
 /// Протокол презентера для отображения главного экрана.
 protocol IRandomImagesPresenter: AnyObject {
 	
-	/// Экран готов для отображения информации.
-	func viewIsReady()
-	
-	/// Загрузка изображения.
-	/// - Parameter index: индекс изображения.
-	func fetch(index: Int, completion: @escaping(Data) -> Void)
+	/// Загрузка случайных изображений
+	func fetchRandom()
 	
 	/// Нажат item коллекции
 	func didItemSelected(index: Int)
 	
-	/// Загрузка изображений по поиску.
-	/// - Parameter searchBy: текст для поиска.
-	func fetchSearchImage(searchBy: String)
+	/// Загрузка изображений по поиску
+	/// - Parameter searchBy: текст для поиска
+	func fetchSearchImage(searchBy: String, page: Int)
+	
+	func fetchNextPage()
 }
  
 typealias ImageClosure = (Image) -> Void
@@ -38,6 +36,8 @@ final class RandomImagesPresenter: IRandomImagesPresenter {
 	// MARK: - Private properties
 	
 	private var images: [Image] = []
+	private var page: Int = 1
+	private var searchText: String = ""
 	
 	// MARK: - Initialization
 	
@@ -49,40 +49,41 @@ final class RandomImagesPresenter: IRandomImagesPresenter {
 	
 	// MARK: - Public methods
 	
-	func viewIsReady() {
+	func fetchRandom() {
+		if page != 1 {
+			page = 1
+			images = []
+		}
 		networkManager.fetchRandomImages { result in
 			switch result {
 			case .success(let images):
-				self.images = images
-				self.view?.renderCollection(viewData: RandomImagesModel.ViewData(images: images))
+				self.images.append(contentsOf: images)
+				self.view?.renderCollection(viewData: RandomImagesModel.ViewData(images: self.images))
 			case .failure(let error):
 				print(error.localizedDescription) // swiftlint:disable:this print_using
 			}
 		}
 	}
 	
-	func fetchSearchImage(searchBy: String) {
-		networkManager.fetchSearchImages(searchBy: searchBy) { result in
+	func fetchSearchImage(searchBy: String, page: Int) {
+		if page == 1 {
+			searchText = searchBy
+			images = []
+		}
+		networkManager.fetchSearchImages(searchBy: searchBy, page: page) { result in
 			switch result {
 			case .success(let images):
-				self.images = images
-				self.view?.renderCollection(viewData: RandomImagesModel.ViewData(images: images))
+				self.page += 1
+				self.images.append(contentsOf: images)
+				self.view?.renderCollection(viewData: RandomImagesModel.ViewData(images: self.images))
 			case .failure(let error):
 				print(error.localizedDescription) // swiftlint:disable:this print_using
 			}
 		}
 	}
 	
-	func fetch(index: Int, completion: @escaping(Data) -> Void) {
-		let url = images[index].urls.small
-		networkManager.fetchData(from: url) { result in
-			switch result {
-			case .success(let data):
-				completion(data)
-			case .failure(let error):
-				print(error.localizedDescription)
-			}
-		}
+	func fetchNextPage() {
+		fetchSearchImage(searchBy: searchText, page: page)
 	}
 	
 	func didItemSelected(index: Int) {

@@ -18,6 +18,12 @@ enum ParametersUrl: String {
 	case clientId = "client_id"
 	case count = "count"
 	case query = "query"
+	case page = "page"
+	case perPage = "per_page"
+}
+
+enum NetworkSettings {
+	static let itemOnPage = 20
 }
 
 protocol INetworkManager {
@@ -28,7 +34,8 @@ protocol INetworkManager {
 	
 	/// Загрузка данных изображений по поиску
 	/// - Parameter seachBy: текст для поиска
-	func fetchSearchImages(searchBy: String, completion: @escaping(Result<[Image], AFError>) -> Void)
+	/// - Parameter page: номер страницы
+	func fetchSearchImages(searchBy: String, page: Int, completion: @escaping(Result<[Image], AFError>) -> Void)
 	
 	/// Загрузка данных случайных изображений
 	func fetchRandomImages(completion: @escaping(Result<[Image], AFError>) -> Void)
@@ -57,11 +64,16 @@ final class NetworkManager: INetworkManager {
 		}
 	}
 	
-	func fetchSearchImages(searchBy: String, completion: @escaping(Result<[Image], AFError>) -> Void) {
+	func fetchSearchImages(searchBy: String, page: Int, completion: @escaping(Result<[Image], AFError>) -> Void) {
 		AF.request(
 			Links.searchURL.rawValue,
 			method: .get,
-			parameters: [ParametersUrl.clientId.rawValue: Links.token.rawValue, ParametersUrl.query.rawValue: searchBy]
+			parameters: [
+				ParametersUrl.clientId.rawValue: Links.token.rawValue, 
+				ParametersUrl.query.rawValue: searchBy,
+				ParametersUrl.page.rawValue: page,
+				ParametersUrl.perPage.rawValue: NetworkSettings.itemOnPage
+			]
 		)
 		.validate()
 		.responseDecodable(of: SearchResult.self) { response in
@@ -75,11 +87,13 @@ final class NetworkManager: INetworkManager {
 	}
 	
 	func fetchRandomImages(completion: @escaping(Result<[Image], AFError>) -> Void) {
-		let numberImages = 12
 		AF.request(
 			Links.randomURL.rawValue,
 			method: .get,
-			parameters: [ParametersUrl.clientId.rawValue: Links.token.rawValue, ParametersUrl.count.rawValue: numberImages]
+			parameters: [
+				ParametersUrl.clientId.rawValue: Links.token.rawValue, 
+				ParametersUrl.count.rawValue: NetworkSettings.itemOnPage
+			]
 		)
 		.validate()
 		.responseDecodable(of: [Image].self) { response in

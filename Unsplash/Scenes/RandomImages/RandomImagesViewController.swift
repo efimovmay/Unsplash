@@ -33,6 +33,9 @@ final class RandomImagesViewController: UIViewController {
 	
 	private var viewData = RandomImagesModel.ViewData(images: [])
 	
+	private var isLoading = false
+	private var isShowRandom = true
+	
 	private lazy var collectionViewimage: UICollectionView = makeCollectionView()
 	private lazy var searchController: UISearchController = makeSearchController()
 	
@@ -41,7 +44,7 @@ final class RandomImagesViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		setupUI()
-		presenter?.viewIsReady()
+		presenter?.fetchRandom()
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -62,13 +65,13 @@ private extension RandomImagesViewController {
 		)
 		alert.addAction(UIAlertAction(title: L10n.Yes.text, style: .destructive))
 		alert.addAction(UIAlertAction(title: L10n.Ok.text, style: .default, handler: { _ in
-			self.presenter?.viewIsReady()
+			self.presenter?.fetchRandom()
 		}))
 		present(alert, animated: true, completion: nil)
 	}
 }
 
-// MARK: - UICollectionvView
+// MARK: - UICollectionViewDataSource
 
 extension RandomImagesViewController: UICollectionViewDataSource {
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -84,9 +87,7 @@ extension RandomImagesViewController: UICollectionViewDataSource {
 			return UICollectionViewCell()
 		}
 		
-		presenter?.fetch(index: indexPath.item, completion: { data in
-			cell.configure(with: UIImage(data: data) ?? .actions)
-		})
+		cell.configure(imageURL: viewData.images[indexPath.item].urls.small)
 		
 		return cell
 	}
@@ -94,7 +95,27 @@ extension RandomImagesViewController: UICollectionViewDataSource {
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		presenter?.didItemSelected(index: indexPath.item)
 	}
+	
+	func collectionView(
+		_ collectionView: UICollectionView,
+		willDisplay cell: UICollectionViewCell,
+		forItemAt indexPath: IndexPath
+	) {
+		if indexPath.row == viewData.images.count - 2 {
+			if !isLoading {
+				isLoading = true
+				switch isShowRandom {
+				case true:
+					presenter?.fetchRandom()
+				case false:
+					presenter?.fetchNextPage()
+				}
+			}
+		}
+	}
 }
+
+// MARK: - UICollectionViewDelegateFlowLayout
 
 extension RandomImagesViewController: UICollectionViewDelegateFlowLayout {
 	func collectionView(
@@ -143,7 +164,19 @@ extension RandomImagesViewController: UICollectionViewDelegateFlowLayout {
 
 extension RandomImagesViewController: UISearchBarDelegate {
 	func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-		presenter?.fetchSearchImage(searchBy: searchBar.text ?? "")
+		isShowRandom = false
+		if !isLoading {
+			isLoading = true
+			presenter?.fetchSearchImage(searchBy: searchBar.text ?? "", page: 1)
+		}
+	}
+	
+	func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+		isShowRandom = true
+		if !isLoading {
+			isLoading = true
+			presenter?.fetchRandom()
+		}
 	}
 }
 
@@ -213,5 +246,6 @@ extension RandomImagesViewController: IRandomImagesViewController {
 	func renderCollection(viewData: RandomImagesModel.ViewData) {
 		self.viewData = viewData
 		self.collectionViewimage.reloadData()
+		isLoading = false
 	}
 }

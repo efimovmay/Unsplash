@@ -50,8 +50,11 @@ final class FavoriteImageCell: UITableViewCell {
 private extension FavoriteImageCell {
 	func makeImageView() -> UIImageView {
 		let imageView = UIImageView()
+
 		imageView.translatesAutoresizingMaskIntoConstraints = false
-		imageView.contentMode = .scaleAspectFit
+		imageView.contentMode = .scaleAspectFill
+		imageView.clipsToBounds = true
+		imageView.layer.cornerRadius = Sizes.cornerRadius
 		return imageView
 	}
 	
